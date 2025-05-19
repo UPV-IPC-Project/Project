@@ -5,6 +5,7 @@
  */
 package poiupv;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +18,15 @@ import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -63,14 +68,16 @@ public class FXMLDocumentController implements Initializable {
     private ScrollPane map_scrollpane;
     @FXML
     private Slider zoom_slider;
-    @FXML
     private MenuButton map_pin;
-    @FXML
     private MenuItem pin_info;
     @FXML
     private SplitPane splitPane;
     @FXML
     private Label mousePosition;
+    @FXML
+    private Button questionButton;
+    @FXML
+    private Button buttonProfile;
 
     @FXML
     void zoomIn(ActionEvent event) {
@@ -220,5 +227,27 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    @FXML
+    private void FXMLQuestionsController(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLQuestions.fxml"));
+    Parent newRoot = loader.load();
+
+    // Replace the current scene
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(new Scene(newRoot));
+    stage.show();
+    }
+
+    @FXML
+    private void goToProfile(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile_1.fxml"));
+    Parent newRoot = loader.load();
+
+    // Replace the current scene
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(new Scene(newRoot));
+    stage.show();
+    }
+    
 
 }

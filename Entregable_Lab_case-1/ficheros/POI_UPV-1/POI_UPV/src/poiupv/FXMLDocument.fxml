@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -14,24 +14,80 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="556.0" prefWidth="853.0" stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLDocumentController">
    <children>
       <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" VBox.vgrow="NEVER">
          <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="Ayuda">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#about" text="Acerca de" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
+            <AnchorPane prefHeight="51.0" prefWidth="155.0">
+               <children>
+                  <Button fx:id="buttonProfile" mnemonicParsing="false" onAction="#goToProfile">
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </AnchorPane>
+            <MenuButton mnemonicParsing="false" prefHeight="51.0" prefWidth="74.0" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false">
+                     <graphic>
+                        <ColorPicker />
+                     </graphic>
+                  </MenuItem>
+                <MenuItem mnemonicParsing="false" />
+              </items>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="37.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/pen.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MenuButton>
+            <Button alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="49.0" prefWidth="57.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="46.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/eraser.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="64.0">
+               <HBox.margin>
+                  <Insets right="130.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/scale.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Region HBox.hgrow="ALWAYS" />
             <Label text="Zoom" />
             <Button mnemonicParsing="false" onAction="#zoomOut" text="-" />
@@ -49,20 +105,11 @@
                <content>
                   <Pane>
                      <children>
-                        <ImageView pickOnBounds="true">
+                        <ImageView fitHeight="4500.0" fitWidth="5000.0" layoutX="-374.0" layoutY="-480.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../resources/upv.jpg" />
+                              <Image url="@../resources/carta_nautica.jpg" />
                            </image>
                         </ImageView>
-                        <MenuButton fx:id="map_pin" mnemonicParsing="false" prefHeight="60.0" prefWidth="48.0" visible="false">
-                           <items>
-                              <MenuItem fx:id="pin_info" mnemonicParsing="false" text="Action 1" />
-                           </items>
-                           <styleClass>
-                              <String fx:value="menu-button" />
-                              <String fx:value="map-pin" />
-                           </styleClass>
-                        </MenuButton>
                      </children>
                   </Pane>
                </content>
@@ -71,7 +118,44 @@
       </SplitPane>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Label fx:id="mousePosition" minHeight="-Infinity" minWidth="-Infinity" text="SceneX:     ScenY:     " wrapText="true" HBox.hgrow="ALWAYS" />
+            <AnchorPane prefHeight="27.0" prefWidth="178.0">
+               <children>
+                  <MenuBar prefHeight="27.0" prefWidth="66.0" AnchorPane.leftAnchor="10.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Ayuda">
+                        <items>
+                          <MenuItem mnemonicParsing="false" onAction="#about" text="Acerca de" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+               </children>
+               <HBox.margin>
+                  <Insets right="50.0" />
+               </HBox.margin>
+            </AnchorPane>
+            <AnchorPane prefHeight="27.0" prefWidth="272.0">
+               <children>
+                  <Button fx:id="questionButton" mnemonicParsing="false" onAction="#FXMLQuestionsController" prefHeight="17.0" prefWidth="174.0" text="Generate question" AnchorPane.rightAnchor="10.0">
+                     <font>
+                        <Font name="Book Antiqua Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="27.0" prefWidth="196.0">
+               <children>
+                  <Button fx:id="questionButton1" mnemonicParsing="false" onAction="#FXMLQuestionsController" prefHeight="17.0" prefWidth="174.0" text="Answer history" AnchorPane.rightAnchor="200.0">
+                     <font>
+                        <Font name="Book Antiqua Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Label fx:id="mousePosition" alignment="CENTER_RIGHT" minHeight="-Infinity" minWidth="-Infinity" text="SceneX:     ScenY:     " wrapText="true" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Label>
          </children>
          <VBox.margin>
             <Insets bottom="12.0" right="12.0" top="6.0" />
