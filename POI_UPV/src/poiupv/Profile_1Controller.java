@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
@@ -22,6 +23,11 @@ import javafx.stage.Stage;
  * @author MPOHJOL
  */
 public class Profile_1Controller implements Initializable {
+
+    @FXML
+    private Button backToMainButton;
+    @FXML
+    private Button buttonEdit;
 
     /**
      * Initializes the controller class.
@@ -43,5 +49,16 @@ public class Profile_1Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void backToMainView(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+    Parent newRoot = loader.load();
+
+    // Replace the current scene
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setScene(new Scene(newRoot));
+    stage.show();
+    }
     
 }

@@ -119,10 +119,15 @@
          <bottom>
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="TOP_RIGHT">
                <children>
-                  <Button mnemonicParsing="false" text="Save">
+                  <Button fx:id="backFromEditButton1" mnemonicParsing="false" onAction="#BackToProfileView" text="Back">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets right="5.0" />
                      </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" text="Save">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>

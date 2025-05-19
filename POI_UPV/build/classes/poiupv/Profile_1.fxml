@@ -146,6 +146,11 @@
          <bottom>
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="TOP_RIGHT">
                <children>
+                  <Button fx:id="backToMainButton" mnemonicParsing="false" onAction="#backToMainView" text="Back">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="buttonEdit" mnemonicParsing="false" onAction="#goToEditProfile" text="Edit">
                      <HBox.margin>
                         <Insets left="10.0" />

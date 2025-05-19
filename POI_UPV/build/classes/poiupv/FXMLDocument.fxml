@@ -19,7 +19,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="556.0" prefWidth="853.0" stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLDocumentController">
@@ -40,14 +39,11 @@
             </Button>
             <MenuButton mnemonicParsing="false" prefHeight="27.0" prefWidth="59.0" text="MenuButton">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1">
+                <MenuItem mnemonicParsing="false">
                      <graphic>
                         <ColorPicker />
                      </graphic></MenuItem>
-                <MenuItem mnemonicParsing="false" text="Action 2">
-                     <graphic>
-                        <Line endX="100.0" startX="-100.0" />
-                     </graphic></MenuItem>
+                <MenuItem mnemonicParsing="false" />
               </items>
                <HBox.margin>
                   <Insets right="5.0" />
