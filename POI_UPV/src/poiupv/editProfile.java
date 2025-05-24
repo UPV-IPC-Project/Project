@@ -15,7 +15,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.User;
 
 
 /**
@@ -26,17 +29,40 @@ import javafx.stage.Stage;
 public class editProfile implements Initializable {
 
     @FXML
-    private Button backFromEditButton;
+    private Button backFromEditButton1;
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private DatePicker birthdatePicker;
 
-    /**
-     * Initializes the controller class.
-     */
-    
+    private userSession currentUser = userSession.getInstance();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        User user = currentUser.getUser();
+        if (user != null) {
+            emailField.setText(user.getEmail());
+            birthdatePicker.setValue(user.getBirthdate());
+        }
+    }
 
+    @FXML
+    private void saveChanges(ActionEvent event) throws IOException {
+        User user = currentUser.getUser();
+        if (user != null) {
+        user.setEmail(emailField.getText());
+        user.setBirthdate(birthdatePicker.getValue());
+        }
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile_1.fxml"));
+        Parent newRoot = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(newRoot));
+        stage.show();
+    }
+    
     @FXML
     private void BackToProfileView(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("Profile_1.fxml"));
@@ -47,5 +73,5 @@ public class editProfile implements Initializable {
     stage.setScene(new Scene(newRoot));
     stage.show();
     }
-    
 }
+

@@ -6,6 +6,7 @@ package poiupv;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.User;
+
 
 /**
  * FXML Controller class
@@ -28,10 +34,41 @@ public class Profile_1Controller implements Initializable {
     private Button backToMainButton;
     @FXML
     private Button buttonEdit;
+    @FXML
+    private ImageView profileImage;
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label birthdateLabel;
 
     /**
      * Initializes the controller class.
      */
+       private userSession currentUser = userSession.getInstance();
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        model.User user = currentUser.getUser();
+        if (user != null) {
+            nameLabel.setText(user.getNickName());
+            emailLabel.setText(user.getEmail());
+
+            // Format birthdate nicely, e.g., 24 May 1990
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            birthdateLabel.setText(user.getBirthdate().format(formatter));
+
+           Image img = user.getAvatar();
+            if (img != null) {
+                profileImage.setImage(img);
+            } else {
+                // Optionally set a default image if none found
+                profileImage.setImage(new Image("file:default-avatar.png"));
+            }
+        }
+    }
+
     
     @FXML
     private void goToEditProfile(ActionEvent event) throws IOException {
@@ -44,12 +81,7 @@ public class Profile_1Controller implements Initializable {
     stage.show();
     }
     
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
+ 
     @FXML
     private void backToMainView(ActionEvent event) throws IOException {
     FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
