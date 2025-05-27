@@ -93,4 +93,18 @@ public class Profile_1Controller implements Initializable {
     stage.show();
     }
     
+    @FXML
+    private void changePasswordButton(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ChangePassword.fxml"));
+        Parent newRoot = loader.load();
+        
+        ChangePasswordController controller = loader.getController();
+        controller.setCurrentUser(currentUser.getUser());
+
+        // Replace the current scene
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(newRoot));
+        stage.show();
+
+    }
 }

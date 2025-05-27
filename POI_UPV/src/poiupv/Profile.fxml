@@ -19,7 +19,7 @@
          <top>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/user.png" />
                      </image>
@@ -96,12 +96,12 @@
                         <Insets bottom="40.0" left="20.0" right="150.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" text="Edit password">
+                  <Button fx:id="editPassword" mnemonicParsing="false" onAction="#changePasswordButton" text="Edit password">
                      <VBox.margin>
                         <Insets bottom="40.0" left="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Choose new avatar">
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#handleChangeAvatar" text="Choose new avatar">
                      <VBox.margin>
                         <Insets bottom="40.0" left="20.0" />
                      </VBox.margin></Button>
