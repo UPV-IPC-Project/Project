@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="663.0" prefWidth="916.0" stylesheets="@../resources/estilos.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLDocumentController">
+<VBox prefHeight="663.0" prefWidth="916.0" stylesheets="@../resources/FXMLStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.FXMLDocumentController">
    <children>
       <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="5.0" VBox.vgrow="NEVER">
          <children>
@@ -43,7 +43,7 @@
                   <Insets left="10.0" />
                </HBox.margin>
             </AnchorPane>
-            <MenuButton mnemonicParsing="false" prefHeight="51.0" prefWidth="74.0" text="MenuButton">
+            <MenuButton minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="74.0" styleClass="button" text="MenuButton">
               <items>
                 <MenuItem mnemonicParsing="false">
                      <graphic>
@@ -63,7 +63,7 @@
                   </ImageView>
                </graphic>
             </MenuButton>
-            <Button alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="49.0" prefWidth="57.0">
+            <Button alignment="CENTER" contentDisplay="CENTER" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="57.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -78,7 +78,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="64.0">
+            <Button minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="64.0">
                <HBox.margin>
                   <Insets right="130.0" />
                </HBox.margin>
@@ -91,9 +91,9 @@
                </graphic>
             </Button>
             <Region HBox.hgrow="ALWAYS" />
-            <Label text="Zoom" />
+            <Label minWidth="40.0" prefHeight="18.0" prefWidth="82.0" text="Zoom" />
             <Button mnemonicParsing="false" onAction="#zoomOut" text="-" />
-            <Slider fx:id="zoom_slider" HBox.hgrow="SOMETIMES" />
+            <Slider fx:id="zoom_slider" styleClass="scroll-bar" HBox.hgrow="SOMETIMES" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#zoomIn" text="+" />
          </children>
          <VBox.margin>
@@ -132,7 +132,10 @@
                         <Insets />
                      </VBox.margin>
                   </ListView>
-                  <Separator prefWidth="220.0" />
+                  <Separator prefWidth="220.0">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin></Separator>
                   <Label fx:id="questionLabel" minWidth="295.0" prefHeight="59.0" prefWidth="295.0" text="Question Placeholder">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -204,9 +207,9 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="665.0">
                <children>
-                  <AnchorPane prefHeight="37.0" prefWidth="118.0">
+                  <AnchorPane prefHeight="38.0" prefWidth="147.0">
                      <children>
-                        <MenuBar prefHeight="27.0" prefWidth="66.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+                        <MenuBar layoutX="11.2" minHeight="35.0" prefHeight="35.0" prefWidth="126.0" styleClass="button" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="5.0">
                           <menus>
                             <Menu mnemonicParsing="false" text="Ayuda">
                               <items>
@@ -217,7 +220,7 @@
                         </MenuBar>
                      </children>
                   </AnchorPane>
-                  <Button fx:id="newSessionButton" mnemonicParsing="false" onAction="#newSessionStarted" prefHeight="26.0" prefWidth="108.0" text="New Session">
+                  <Button fx:id="newSessionButton" mnemonicParsing="false" onAction="#newSessionStarted" prefHeight="35.0" prefWidth="126.0" text="New Session">
                      <font>
                         <Font name="Book Antiqua Bold" size="13.0" />
                      </font>
@@ -225,12 +228,12 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="endSessionButton" mnemonicParsing="false" onAction="#endPressed" prefHeight="26.0" prefWidth="114.0" text="End Session">
+                  <Button fx:id="endSessionButton" mnemonicParsing="false" onAction="#endPressed" prefHeight="35.0" prefWidth="126.0" text="End Session">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="historyButton" mnemonicParsing="false" onAction="#historyPressed" prefHeight="26.0" prefWidth="144.0" text="Session History">
+                  <Button fx:id="historyButton" mnemonicParsing="false" onAction="#historyPressed" prefHeight="35.0" prefWidth="126.0" text="Session History">
                      <font>
                         <Font name="Book Antiqua Bold" size="13.0" />
                      </font>
@@ -243,7 +246,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </HBox>
-            <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Log out">
+            <Button contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="34.0" prefWidth="150.0" text="Log out">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                      <image>

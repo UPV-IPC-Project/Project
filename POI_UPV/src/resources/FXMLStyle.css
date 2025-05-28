@@ -1,0 +1,117 @@
+
+
+/* Root pane background */
+.root {
+    -fx-background-color: #f9fafb; /* very light gray */
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333; /* dark gray text */
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #c8e1ff;
+    -fx-text-fill: black;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-font-weight: 600;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 2, 0, 0, 1);
+    -fx-border-color: transparent;
+    -fx-border-radius: 8px;
+    -fx-border-width: 0;
+}
+
+/* Button hover effect */
+.button:hover {
+    -fx-background-color:#829cf3;
+}
+
+
+
+/* Labels */
+.label {
+    -fx-text-fill: #444444;
+    -fx-font-weight: 600;
+}
+
+/* ListView */
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #e1e4e8;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 5;
+}
+
+/* Scroll bars */
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #c8e1ff;
+    -fx-background-insets: 0;
+    -fx-background-radius: 6px;
+}
+/* RadioButton container spacing */
+.radio-button {
+    -fx-padding: 6 0 6 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+/* RadioButton circle */
+.radio-button .radio {
+    -fx-background-color: white;
+    -fx-border-color: #c8e1ff; /* bright blue border */
+    -fx-border-width: 2px;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-min-width: 18px;
+    -fx-min-height: 18px;
+    -fx-max-width: 18px;
+    -fx-max-height: 18px;
+    -fx-padding: 2;
+    -fx-cursor: hand;
+}
+
+/* Checked radio circle fill */
+.radio-button:selected .radio {
+    -fx-background-color: #4a90e2;
+}
+
+/* Inner dot for selected radio */
+.radio-button:selected .radio > .radio-mark {
+    -fx-background-color: white;
+    -fx-background-radius: 50%;
+    -fx-min-width: 8px;
+    -fx-min-height: 8px;
+    -fx-max-width: 8px;
+    -fx-max-height: 8px;
+}
+
+/* Hover effect */
+.radio-button:hover .radio {
+    -fx-border-color: #357ABD;
+}
+
+/* Disabled state */
+.radio-button:disabled {
+    -fx-text-fill: #a0a0a0;
+}
+
+.radio-button:disabled .radio {
+    -fx-border-color: #c0c0c0;
+    -fx-background-color: #f0f0f0;
+}
+/* Focused DatePicker */
+.date-picker:focused {
+    -fx-border-color: #4a90e2;
+    -fx-border-width: 2px;
+}
+
+/* DatePicker prompt text */
+.date-picker .text-field {
+    -fx-prompt-text-fill: #b0b6bc;
+}

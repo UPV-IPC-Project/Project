@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="poiupv.RegisterController">
+<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="10.0" stylesheets="@../resources/FXMLStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poiupv.RegisterController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -26,8 +26,8 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="26.600012207031227" minHeight="10.0" prefHeight="15.399999999999977" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="47.39999999999998" minHeight="10.0" prefHeight="47.39999999999998" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Register" GridPane.columnSpan="2">
@@ -35,18 +35,18 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Label text="Nickname" GridPane.rowIndex="1" />
-      <Label text="Email" GridPane.rowIndex="2" />
-      <Label text="Password" GridPane.rowIndex="3" />
-      <Label text="Confirm password" GridPane.rowIndex="4" />
+      <Label text="Nickname:" GridPane.rowIndex="1" />
+      <Label text="Email:" GridPane.rowIndex="2" />
+      <Label text="Password:" GridPane.rowIndex="3" />
+      <Label text="Confirm password:" GridPane.rowIndex="4" />
       <DatePicker fx:id="birthdateField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Birthdate" GridPane.rowIndex="5" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Avatar" GridPane.rowIndex="6" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Birthdate:" GridPane.rowIndex="5" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Avatar:" GridPane.rowIndex="6" />
       <Button fx:id="chooseImageButton" mnemonicParsing="false" onAction="#chooseImageClicked" text="Choose Image" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <Button fx:id="backButton" mnemonicParsing="false" onAction="#backClicked" text="Back" GridPane.columnIndex="1" GridPane.rowIndex="8" />
       <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerClicked" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="8">
          <GridPane.margin>
-            <Insets left="60.0" />
+            <Insets left="70.0" />
          </GridPane.margin>
       </Button>
       <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
