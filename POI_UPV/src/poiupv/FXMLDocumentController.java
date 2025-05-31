@@ -34,6 +34,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -47,9 +48,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -77,6 +83,8 @@ public class FXMLDocumentController implements Initializable {
     // la variable zoomGroup se utiliza para dar soporte al zoom
     // el escalado se realiza sobre este nodo, al escalar el Group no mueve sus nodos
     private Group zoomGroup;
+    private Group drawingGroup = new Group();
+    private Group overlayGroup = new Group();
 
     @FXML
     private ListView<Poi> map_listview;
@@ -113,6 +121,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button historyButton;
     
+    private boolean rulerVisible = false;
     
     @FXML
     private ToggleGroup ANSWERCHOICES;
@@ -120,6 +129,11 @@ public class FXMLDocumentController implements Initializable {
     private Button checkButton;
     @FXML
     private Button nextButton;
+    private Point2D penStart, rulerStart;
+    private boolean penMode = false;
+    private boolean rulerMode = false;
+    private Line currentLine;
+    private ImageView rulerView;
     // Current user
     userSession currentUser = userSession.getInstance();
     User user;
@@ -146,6 +160,18 @@ public class FXMLDocumentController implements Initializable {
     RadioButton[] radioButtons;
     // Instance navigation
     Navigation navigation;
+    @FXML
+    private Button logOutButton;
+    @FXML
+    private ColorPicker colorPicker;
+    @FXML
+    private Button eraserButton;
+    @FXML
+    private Button rulerButton;
+    @FXML
+    private Pane drawingPane;
+    @FXML
+    private MenuItem confirmButton;
 
     @FXML
     void zoomIn(ActionEvent event) {
@@ -205,16 +231,21 @@ public class FXMLDocumentController implements Initializable {
 
     private void initData() {
         data=map_listview.getItems();
-        data.add(new Poi("1F", "Edificion del DSIC", 275, 250));
-        data.add( new Poi("Agora", "Agora", 575, 350));
-        data.add( new Poi("Pista", "Pista de atletismo y campo de futbol", 950, 350));
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //drawingPane.getChildren().add(drawingGroup);
+        confirmButton.setText("OFF");
+        drawingPane.getChildren().addAll(overlayGroup, drawingGroup);
         questionLabel.setWrapText(true);
         // TODO
         initData();
+        
+        drawingPane.setOnMousePressed(this::mousePressed);
+        drawingPane.setOnMouseDragged(this::mouseDragged);
+        drawingPane.setOnMouseReleased(this::mouseReleased);
         //==========================================================
         // inicializamos el slider y enlazamos con el zoom
         zoom_slider.setMin(0.5);
@@ -341,6 +372,7 @@ public class FXMLDocumentController implements Initializable {
     private void newSessionStarted(ActionEvent event) {
         endSessionButton.setDisable(false);
         newSessionButton.setDisable(true);
+        drawingGroup.getChildren().clear();
         checkButton.setVisible(true);
         nextButton.setVisible(true);
         List<Problem> temp = navigation.getProblems();
@@ -503,10 +535,118 @@ public class FXMLDocumentController implements Initializable {
         
     }
 
+    @FXML
+    private void logOutPressed(ActionEvent event) {
+        userSession.getInstance().setUser(null);
 
     
+        try {
+        PoiUPVApp.switchScene("login.fxml", "Login");
+    } catch (Exception e) {
+        
+    }
+    }
+
+    @FXML
+    private void colorPicked(ActionEvent event) {
+    }
+
+    @FXML
+    private void penActivated(ActionEvent event) {
+        penMode = !penMode; 
+        rulerMode = false;
+        confirmButton.setText(penMode ? "Drawing: ON" : "Drawing: OFF");
+    }
+
+    @FXML
+    private void eraserActivated(ActionEvent event) {
+        drawingGroup.getChildren().clear();
+    }
     
+    private void showRulerImage() {
+    Image rulerImg = new Image(getClass().getResourceAsStream("/resources/transportador.png"));
+    rulerView = new ImageView(rulerImg);
+    rulerView.setOpacity(0.5);
+
+    rulerView.setFitWidth(200);
+    rulerView.setPreserveRatio(true);
+    rulerView.setX(100);
+    rulerView.setY(100);
+
+    // Allow dragging
+    rulerView.setOnMousePressed(e -> {
+        rulerView.setUserData(new Point2D(e.getX(), e.getY()));
+        e.consume();
+    });
+
+    rulerView.setOnMouseDragged(e -> {
+        Point2D start = (Point2D) rulerView.getUserData();
+        double offsetX = e.getX() - start.getX();
+        double offsetY = e.getY() - start.getY();
+        rulerView.setX(rulerView.getX() + offsetX);
+        rulerView.setY(rulerView.getY() + offsetY);
+        rulerView.setUserData(new Point2D(e.getX(), e.getY()));
+        e.consume();
+    });
+
+    //drawingGroup.getChildren().add(rulerView);
+    overlayGroup.getChildren().add(rulerView);
+}
     
-    
+    @FXML
+    private void rulerActivated(ActionEvent event) {
+        rulerMode = true;
+        penMode = false;
+        if (!rulerVisible) {
+        showRulerImage();
+        rulerVisible = true;
+    } else {
+        overlayGroup.getChildren().remove(rulerView);
+        rulerVisible = false;
+    }
+    }
+
+    @FXML
+    private void mouseReleased(MouseEvent event) {
+    /*if (rulerMode && currentLine != null) {
+        Point2D start = new Point2D(currentLine.getStartX(), currentLine.getStartY());
+        Point2D end = new Point2D(currentLine.getEndX(), currentLine.getEndY());
+        double distance = start.distance(end);
+        Text label = new Text(
+    (currentLine.getStartX() + currentLine.getEndX()) / 2,
+    (currentLine.getStartY() + currentLine.getEndY()) / 2 - 10,
+    String.format("%.1f px", distance)
+    );
+        
+        
+        drawingGroup.getChildren().add(label);
+    }*/ //test for line drawing
+    currentLine = null;
+    event.consume();
+    }
+
+    @FXML
+    private void mousePressed(MouseEvent event) {
+        if (penMode || rulerMode) {
+            currentLine = new Line();
+            currentLine.setStartX(event.getX());
+            currentLine.setStartY(event.getY());
+            currentLine.setEndX(event.getX());
+            currentLine.setEndY(event.getY());
+            currentLine.setStroke(penMode ? colorPicker.getValue() : Color.BLUE);
+            currentLine.setStrokeWidth(2);
+            drawingGroup.getChildren().add(currentLine);
+            event.consume();
+    }
+    }
+
+    @FXML
+    private void mouseDragged(MouseEvent event) {
+        if (currentLine != null) {
+            currentLine.setEndX(event.getX());
+            currentLine.setEndY(event.getY());
+            event.consume();
+    }
+    }
 
 }
